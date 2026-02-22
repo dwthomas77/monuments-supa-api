@@ -1,0 +1,20 @@
+{
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/server/local.ts"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.0",
+    "supabase": "^2.76.11",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.97.0",
+    "dotenv": "^17.3.1",
+    "fastify": "^5.7.4"
+  }
+}
