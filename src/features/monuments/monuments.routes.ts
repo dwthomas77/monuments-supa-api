@@ -1,6 +1,6 @@
 import type { FastifyInstance } from 'fastify';
-import type { MonumentsRepository } from './monuments.repository.js';
 import { createMonumentsController } from './monuments.controller.js';
+import { createMonumentsRepository } from './monuments.repository.js';
 
 export interface Monument {
   id: number;
@@ -46,11 +46,16 @@ const monumentOpts = {
   },
 };
 
-export async function registerMonumentsRoutes(
-  app: FastifyInstance,
-  repo: MonumentsRepository
-): Promise<void> {
+export function monumentRoutes(app: FastifyInstance, _options: unknown, done: () => void): void { 
+  const db = app.supabase;
+
+  if (!db) {
+    throw new Error('Supabase client is not available on Fastify instance.');
+  }
+
+  const repo = createMonumentsRepository(db);
   const { listMonuments, createMonument } = createMonumentsController(repo);
   app.get('/monuments', listMonuments);
   app.post('/monuments', monumentOpts, createMonument);
-}
+  done();
+};

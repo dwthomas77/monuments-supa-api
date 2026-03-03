@@ -1,6 +1,9 @@
 import type { Monument, MonumentsRepository } from './monuments.repository.js';
 
 export async function getMonuments(repo: MonumentsRepository): Promise<{ monuments: Monument[] }> {
+  console.log('THIS IS THE REPO')
+  console.log(repo)
+  console.log(repo.findAll)
   const monuments = await repo.findAll();
   return { monuments };
 }
